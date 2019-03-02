@@ -59,7 +59,7 @@ export default {
       localStorage.csrf = response.data.csrf;
       localStorage.signedIn = true;
       this.error = "";
-      this.$router.replace("/todos");
+      this.$router.replace("/movies");
     },
     signinFailed(error) {
       this.error =
@@ -70,7 +70,7 @@ export default {
     },
     checkSignedIn() {
       if (localStorage.signedIn) {
-        this.$router.replace("/todos");
+        this.$router.replace("/movies");
       }
     }
   }
