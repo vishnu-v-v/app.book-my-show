@@ -3,14 +3,21 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import VueAxios from "vue-axios";
-import axios from "./api/axios";
+import { securedAxiosInstance, plainAxiosInstance } from "./api/axios";
+import BootstrapVue from "bootstrap-vue";
+import "./assets/stylesheets/base.scss";
 
 Vue.config.productionTip = false;
-Vue.use(VueAxios, axios);
+Vue.use(BootstrapVue);
+Vue.use(VueAxios, {
+  secured: securedAxiosInstance,
+  plain: plainAxiosInstance
+});
 
 new Vue({
   router,
   store,
-  axios,
+  securedAxiosInstance,
+  plainAxiosInstance,
   render: h => h(App)
 }).$mount("#app");
