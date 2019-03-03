@@ -1,14 +1,8 @@
 <template>
-  <nav class="navbar rounded">
-    <ul class="navbar ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" v-if="showAdminLink()">Admin</a>
-      </li>
-      <li class="nav-item sign-out">
-        <a class="nav-link" @click="signOut">Sign out</a>
-      </li>
-    </ul>
-  </nav>
+  <div id="nav">
+    <router-link v-if="showAdminLink()" to="/admin/revenue">Admin Dashboard</router-link>
+    <b-link class="nav-link" @click="signOut">Sign out</b-link>
+  </div>
 </template>
 
 <script>
