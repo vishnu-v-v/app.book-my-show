@@ -51,26 +51,26 @@ export default {
         .then(response => this.signinSuccessful(response))
         .catch(error => this.signinFailed(error));
     },
-    signinSuccessful(response) {
+    signinSuccessful (response) {
       if (!response.data.csrf) {
-        this.signinFailed(response);
-        return;
+        this.signinFailed(response)
+        return
       }
-      localStorage.csrf = response.data.csrf;
-      localStorage.signedIn = true;
-      this.error = "";
-      this.$router.replace("/movies");
+      this.$http.plain.get('/me')
+        .then(meResponse => {
+          this.$store.commit('setCurrentUser', { currentUser: meResponse.data, csrf: response.data.csrf })
+          this.error = ''
+          this.$router.replace('/moives')
+        })
+        .catch(error => this.signinFailed(error))
     },
-    signinFailed(error) {
-      this.error =
-        (error.response && error.response.data && error.response.data.error) ||
-        "";
-      delete localStorage.csrf;
-      delete localStorage.signedIn;
+    signinFailed (error) {
+      this.error = (error.response && error.response.data && error.response.data.error) || ''
+      this.$store.commit('unsetCurrentUser')
     },
-    checkSignedIn() {
-      if (localStorage.signedIn) {
-        this.$router.replace("/movies");
+    checkSignedIn () {
+      if (this.$store.state.signedIn) {
+        this.$router.replace('/movies')
       }
     }
   }

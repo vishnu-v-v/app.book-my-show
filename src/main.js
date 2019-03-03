@@ -1,7 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
-import store from "./store";
+import { store } from "./store";
 import VueAxios from "vue-axios";
 import { securedAxiosInstance, plainAxiosInstance } from "./api/axios";
 import BootstrapVue from "bootstrap-vue";
