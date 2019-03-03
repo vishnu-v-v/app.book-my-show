@@ -18,7 +18,9 @@
               bulk of the card's content.
             </b-card-text>
 
-            <b-button @click="selectShow(show)" variant="primary">Book Now</b-button>
+            <b-button @click="selectShow(show)" variant="primary"
+              >Book Now</b-button
+            >
           </b-card>
         </b-col>
       </b-row>
@@ -28,7 +30,7 @@
 
 <script>
 import AppHeader from "@/components/AppHeader";
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 
 export default {
   name: "Movies",
@@ -38,13 +40,13 @@ export default {
     this.getAllShows();
   },
   computed: mapState({
-    movieList: 'shows',
+    movieList: "shows"
   }),
   methods: {
     getAllShows() {
       this.$http.secured
         .get("/shows")
-        .then((response) => {
+        .then(response => {
           this.$store.commit("setShowsList", response);
         })
         .catch(error => this.setError(error, "Cannot fetch the shows list"));
@@ -52,7 +54,7 @@ export default {
     selectShow(show) {
       this.$http.secured
         .get(`/shows/${show.id}`)
-        .then((response) => {
+        .then(response => {
           this.$store.commit("setCurrentShow", response.data.data);
           this.$store.commit("setSeats", response.data.included);
           this.$router.replace("/book-seats");

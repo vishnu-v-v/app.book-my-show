@@ -1,12 +1,13 @@
 <template>
   <div id="nav">
-    <router-link v-if="showAdminLink()" to="/admin/revenue">Admin Dashboard</router-link>
+    <router-link v-if="showAdminLink()" to="/admin/revenue"
+      >Admin Dashboard</router-link
+    >
     <b-link class="nav-link" @click="signOut">Sign out</b-link>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "AppHeader",
   methods: {
