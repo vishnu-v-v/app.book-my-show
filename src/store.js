@@ -8,14 +8,16 @@ export const store = new Vuex.Store({
     currentUser: {},
     signedIn: false,
     csrf: null,
-    shows: []
+    shows: [],
+    show: {},
+    seats: []
   },
   getters: {
     isAdmin(state) {
       return state.currentUser && state.currentUser.role === "admin";
     },
-    isManager(state) {
-      return state.currentUser && state.currentUser.role === "manager";
+    showId(state) {
+      return state.show.id;
     }
   },
   mutations: {
@@ -32,6 +34,20 @@ export const store = new Vuex.Store({
     refresh(state, csrf) {
       state.signedIn = true;
       state.csrf = csrf;
+    },
+    setShowsList(state, response) {
+      state.shows = response.data.data;
+    },
+    setCurrentShow(state, show) {
+      state.show = show;
+    },
+    setSeats(state, seats) {
+      state.seats = seats;
+    },
+    selectSeat(state, index) {
+      if (state.seats[index]["selected"])
+        state.seats[index]["selected"] = false;
+      else state.seats[index]["selected"] = true;
     }
   },
   plugins: [createPersistedState()]

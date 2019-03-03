@@ -12,6 +12,7 @@
 </template>
 
 <script>
+
 export default {
   name: "AppHeader",
   methods: {
@@ -30,7 +31,7 @@ export default {
         .catch(error => this.setError(error, "Cannot sign out"));
     },
     showAdminLink() {
-      return this.$store.getters.isAdmin || this.$store.getters.isManager;
+      return this.$store.getters.isAdmin;
     }
   }
 };
