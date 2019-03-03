@@ -13,22 +13,25 @@
 
 <script>
 export default {
-  name: 'AppHeader',
+  name: "AppHeader",
   methods: {
-    setError (error, text) {
-      this.error = (error.response && error.response.data && error.response.data.error) || text
+    setError(error, text) {
+      this.error =
+        (error.response && error.response.data && error.response.data.error) ||
+        text;
     },
-    signOut () {
-      this.$http.secured.delete('/signin')
-        .then(response => {
-          this.$store.commit('unsetCurrentUser')
-          this.$router.replace('/')
+    signOut() {
+      this.$http.secured
+        .delete("/signin")
+        .then(() => {
+          this.$store.commit("unsetCurrentUser");
+          this.$router.replace("/");
         })
-        .catch(error => this.setError(error, 'Cannot sign out'))
+        .catch(error => this.setError(error, "Cannot sign out"));
     },
-    showAdminLink () {
-      return this.$store.getters.isAdmin || this.$store.getters.isManager
+    showAdminLink() {
+      return this.$store.getters.isAdmin || this.$store.getters.isManager;
     }
   }
-}
+};
 </script>

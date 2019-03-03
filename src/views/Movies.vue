@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="signOut">Sign out</button>
+    <AppHeader />
     <b-container class="bv-example-row">
       <b-row>
         <b-col>
@@ -63,19 +63,10 @@
 </template>
 
 <script>
+import AppHeader from "@/components/AppHeader";
+
 export default {
   name: "Movies",
-  methods: {
-    signOut() {
-      this.$http.secured
-        .delete("/signin")
-        .then(() => {
-          delete localStorage.csrf;
-          delete localStorage.signedIn;
-          this.$router.replace("/");
-        })
-        .catch(error => this.setError(error, "Cannot sign out"));
-    }
-  }
+  components: { AppHeader }
 };
 </script>

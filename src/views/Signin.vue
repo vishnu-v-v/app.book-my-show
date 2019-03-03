@@ -51,26 +51,32 @@ export default {
         .then(response => this.signinSuccessful(response))
         .catch(error => this.signinFailed(error));
     },
-    signinSuccessful (response) {
+    signinSuccessful(response) {
       if (!response.data.csrf) {
-        this.signinFailed(response)
-        return
+        this.signinFailed(response);
+        return;
       }
-      this.$http.plain.get('/me')
+      this.$http.plain
+        .get("/me")
         .then(meResponse => {
-          this.$store.commit('setCurrentUser', { currentUser: meResponse.data, csrf: response.data.csrf })
-          this.error = ''
-          this.$router.replace('/moives')
+          this.$store.commit("setCurrentUser", {
+            currentUser: meResponse.data,
+            csrf: response.data.csrf
+          });
+          this.error = "";
+          this.$router.replace("/movies");
         })
-        .catch(error => this.signinFailed(error))
+        .catch(error => this.signinFailed(error));
     },
-    signinFailed (error) {
-      this.error = (error.response && error.response.data && error.response.data.error) || ''
-      this.$store.commit('unsetCurrentUser')
+    signinFailed(error) {
+      this.error =
+        (error.response && error.response.data && error.response.data.error) ||
+        "";
+      this.$store.commit("unsetCurrentUser");
     },
-    checkSignedIn () {
+    checkSignedIn() {
       if (this.$store.state.signedIn) {
-        this.$router.replace('/movies')
+        this.$router.replace("/movies");
       }
     }
   }
